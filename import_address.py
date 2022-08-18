@@ -9,18 +9,13 @@ def import_packages(file, map):
         next(readCSV)
         package_names = ['a{i}' for i in range(40)]
         for row in readCSV:
-            if row[0] == "":
-                break
-            id = int(row[0])
-            address = row[1]
-            city = row[2]
-            state = row[3]
-            zip = row[4]
-            deadline = row[5]
-            mass = int(row[6])
-            notes = row[7]
+            temp = []
+            for i in range(0, len(row)):
+                temp.append(row[i])
+
+
             # package_names[row - 1] = Package(id, address, city, state, zip, deadline, mass, notes)
-            map.add(id, Package(id, address, city, state, zip, deadline, mass, notes))
+            # map.add(id, Package(id, address, city, state, zip, deadline, mass, notes))
 
 
 
