@@ -1,3 +1,4 @@
+from HashMap import HashMap
 class Truck:
     def __init__(self, truck_id, weight, num_packages, driver, miles_driven):
         self.truck_id = truck_id
