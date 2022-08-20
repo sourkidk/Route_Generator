@@ -9,14 +9,14 @@ def main():
 
     h = HashMap(64)
     import_packages('WGUPS Package File.csv', h)
-    h.print()
+    # h.print()
 
-    print(h.get(1).address)
-    print(h.get(2).address)
-    print(h.get(3).address)
-    print(h.get(4).address)
-    print(h.get(5).address)
-    print(h.get(6).address)
+    # print(h.get(1).address)
+    # print(h.get(2).address)
+    # print(h.get(3).address)
+    # print(h.get(4).address)
+    # print(h.get(5).address)
+    # print(h.get(6).address)
 
     truck1 = Truck(1, 0, 0, 'John', 0)
 
