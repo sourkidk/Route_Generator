@@ -26,10 +26,10 @@ def import_addresses(file):
         print(graph.adjacency_list.keys())
 
 
-        # for r in range(0, len(table)):
-        #     for i in range(2, len(table[r])):
-        #         if table[r][i] != '':
-        #             graph.add_undirected_edge(str(r), str(i-2), table[r][i])
+        for r in range(0, len(table)):
+            for i in range(2, len(table[r])):
+                if table[r][i] != '':
+                    graph.add_undirected_edge(str(r), str(i-2), table[r][i])
 
         print(graph.adjacency_list)
 
