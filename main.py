@@ -22,6 +22,10 @@ def main():
 
     import_addresses('WGUPS Distance Table.csv')
 
+    # r = {}
+    # r["0"] = []
+    # print(r.get("0"))
+
 
 
 

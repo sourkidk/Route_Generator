@@ -18,18 +18,23 @@ def import_addresses(file):
             temp = row
             table.append(row)
             # print(row)
-            graph.add_vertex(Vertex(str(row_count)))
+            graph.add_vertex(Vertex(row_count))
             row_count += 1
 
 
         print(graph.adjacency_list)
+
+        # graph.adjacency_list[0]
+
+
         print(graph.adjacency_list.keys())
 
 
-        for r in range(0, len(table)):
-            for i in range(2, len(table[r])):
-                if table[r][i] != '':
-                    graph.add_undirected_edge(str(r), str(i-2), table[r][i])
+        # for r in range(0, len(table)):
+        #     for i in range(2, len(table[r])):
+        #         if table[r][i] != '':
+        #             graph.add_undirected_edge(str(r), str(i-2), table[r][i])
+
 
         print(graph.adjacency_list)
 
