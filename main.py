@@ -9,7 +9,10 @@ def main():
 
     h = HashMap(64)
     import_packages('WGUPS Package File.csv', h)
-    # h.print()
+    h.print()
+
+
+
 
     # print(h.get(1).address)
     # print(h.get(2).address)
