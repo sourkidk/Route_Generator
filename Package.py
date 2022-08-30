@@ -10,7 +10,10 @@ class Package:
         self.notes = notes
 
     def __str__(self):
-        return '{self.id}: {self.deadline}'.format(self=self)
+        return '{self.id}: {self.address} : {self.deadline}'.format(self=self)
+
+    def __repr__(self):
+        return 'Package_#: {self.id}'.format(self=self)
 
 
 

@@ -7,12 +7,11 @@ def import_packages(file, map):
     with open(file) as package_file:
         readCSV = csv.reader(package_file, delimiter=',')
         next(readCSV)
-        package_names = ['a{i}' for i in range(40)]
         for row in readCSV:
             if row[0] == "":
                 break
             id = int(row[0])
-            address = row[1]
+            address = row[1] + "\n(" + row[4] + ")"
             city = row[2]
             state = row[3]
             zip = row[4]
@@ -20,7 +19,7 @@ def import_packages(file, map):
             mass = int(row[6])
             notes = row[7]
 
-            map.add(id, Package(id, address, city, state, zip, deadline, mass, notes))
+            map.add(address, Package(id, address, city, state, zip, deadline, mass, notes))
 
 
 
