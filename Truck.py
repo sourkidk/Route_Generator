@@ -3,7 +3,6 @@ class Truck:
     def __init__(self, truck_id, weight, driver, miles_driven, location):
         self.truck_id = truck_id
         self.weight = weight,
-        self.num_packages = len(self.packages)
         self.packages = []
         self.driver = driver
         self.miles_driven = miles_driven

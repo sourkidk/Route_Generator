@@ -4,10 +4,10 @@ from HashMap import HashMap
 from graphs import *
 
 
-def import_addresses(file) -> str:
+def import_addresses(file, graph) -> str:
     with open(file, encoding='utf-8-sig') as package_file:
         readCSV = csv.reader(package_file, delimiter=',')
-        paper = Graph()
+        route_graph = graph
         # names = [f'a{i}' for i in range(1, 25)]
         header = next(readCSV)
         # print(header)
@@ -16,19 +16,19 @@ def import_addresses(file) -> str:
         for row in readCSV:
             table.append(row)
             # print(row)
-            paper.add_vertex(row_count)
+            route_graph.add_vertex(row_count)
             row_count += 1
 
         for r in range(0, len(table)):
             for i in range(2, len(table[r])):
                 if table[r][i] != '' and float(table[r][i]) != 0 :
-                    paper.add_undirected_edge(int(r), int(i-2), float(table[r][i]))
+                    route_graph.add_undirected_edge(int(r), int(i-2), float(table[r][i]))
 
 
         # for row in table:
         #     print(row)
-        # print(paper.adjacency_list)
-        # print(paper.edge_weights)
+        # print(route_graph.adjacency_list)
+        # print(route_graph.edge_weights)
         print(table[0])
         print(table[6])
         print(table[17])
@@ -36,7 +36,7 @@ def import_addresses(file) -> str:
 
 
 
-        # s = paper.adjacency_list[0]
+        # s = route_graph.adjacency_list[0]
         s = [6]
         print(s)
         coordinate_list = [(21, i) for i in s]
@@ -44,7 +44,7 @@ def import_addresses(file) -> str:
 
 
 
-        min_val, min_key = min((paper.edge_weights[k], k) for k in coordinate_list)
+        min_val, min_key = min((route_graph.edge_weights[k], k) for k in coordinate_list)
         print(min_val)
         print(min_key)
 
