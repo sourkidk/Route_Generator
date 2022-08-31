@@ -8,6 +8,7 @@ class Package:
         self.deadline = deadline
         self.mass = mass
         self.notes = notes
+        self.status = "At Hub"
 
     def __str__(self):
         return '{self.id}: {self.address} : {self.deadline}'.format(self=self)
