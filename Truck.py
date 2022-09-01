@@ -1,6 +1,10 @@
 from HashMap import HashMap
 from graphs import *
 
+class Timer:
+    def __init__(self):
+        self.time = 0
+
 
 
 class Truck:

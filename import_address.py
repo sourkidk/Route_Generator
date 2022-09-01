@@ -23,11 +23,6 @@ def import_addresses(file, graph) -> str:
                 if table[r][i] != '':
                     graph.add_undirected_edge(int(r), int(i-2), float(table[r][i]))
 
-        # for r in range(0, len(table)):
-        #     for i in range(2, len(table[r])):
-        #         if table[r][i] != '' and float(table[r][i]) != 0 :
-        #             graph.add_undirected_edge(int(r), int(i-2), float(table[r][i]))
-
 
         return table[0][1]
 
