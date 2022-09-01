@@ -9,7 +9,7 @@ def main():
     import_packages('WGUPS Package File.csv', h)
     # h.print()
 
-    truck1 = Truck(1, 0, 'John', "HUB", [1,2,3,4])
+    truck1 = Truck(1, 0, 'John', "HUB", [1,2,3,4,5,6,7,8,9,10])
 
 
     print(truck1.packages)
@@ -19,15 +19,18 @@ def main():
     import_addresses('WGUPS Distance Table.csv', g)
 
     truck1.get_vertices(g, h)
-    print(truck1.stops)
+    # print(truck1.stops)
 
-    s = truck1.stops
-    coordinate_list = [(0, i) for i in s]
-    print(coordinate_list)
+    while len(truck1.stops) > 0:
+        truck1.move_to_next_stop(g)
 
-    min_val, min_key = min((g.edge_weights[k], k) for k in coordinate_list)
-    print(min_val)
-    print(min_key)
+    truck1.return_to_hub(g)
+
+
+
+
+
+
 
 
 

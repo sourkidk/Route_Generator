@@ -1,5 +1,8 @@
 from HashMap import HashMap
 from graphs import *
+
+
+
 class Truck:
     def __init__(self, truck_id, weight, driver, location, packages):
         self.truck_id = truck_id
@@ -12,19 +15,34 @@ class Truck:
         self.route = []
         self.pack_map = HashMap(16)
         self.location = location
+        self.current_stop = 0
 
     def get_vertices(self, graph, map):
         for item in self.packages:
             self.stops.append(graph.address_list[map.get(item).address])
-    #
-    # def move_to_next_stop(self, current_stop):
-    #     s = self.stops
-    #
-    #     coordinate_list = [(0, i) for i in s]
-    #     print(coordinate_list)
-    #
-    #     min_val, min_key = min((g.edge_weights[k], k) for k in coordinate_list)
-    #     print(min_val)
-    #     print(min_key)
 
+    def move_to_next_stop(self, graph):
+        coordinate_list = [(self.current_stop, i) for i in self.stops]
+        print(coordinate_list)
+
+        distance, next_stop = min((graph.edge_weights[k], k) for k in coordinate_list)
+        print(distance)
+        print(next_stop)
+        self.miles_driven += distance
+        self.stops.remove(next_stop[1])
+        self.current_stop = next_stop[1]
+
+        print(round(self.miles_driven, 1))
+        print("\n")
+
+    def return_to_hub(self, graph):
+        print(self.current_stop)
+        distance = graph.edge_weights[(self.current_stop, 0)]
+        print(distance)
+
+        self.miles_driven += distance
+        self.current_stop = 0
+
+        print(round(self.miles_driven, 1))
+        print("\n")
 
