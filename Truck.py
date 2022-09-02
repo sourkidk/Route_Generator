@@ -8,7 +8,7 @@ class Timer:
 
 
 class Truck:
-    def __init__(self, truck_id, weight, driver, location, packages):
+    def __init__(self, truck_id, weight, start_time, driver, location, packages):
         self.truck_id = truck_id
         self.weight = weight,
         self.packages = packages
@@ -20,6 +20,7 @@ class Truck:
         self.pack_map = HashMap(16)
         self.location = location
         self.current_stop = 0
+        self.start_time = start_time
 
     def get_vertices(self, graph, map):
         for item in self.packages:
