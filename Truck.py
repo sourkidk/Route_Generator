@@ -1,5 +1,7 @@
 from HashMap import HashMap
 from graphs import *
+from datetime import *
+import sys
 
 class Timer:
     def __init__(self):
@@ -8,63 +10,132 @@ class Timer:
 
 
 class Truck:
-    def __init__(self, truck_id, weight, start_time, driver, location, packages):
+    def __init__(self, graph, master,  truck_id, start_time, driver, location, packages):
         self.truck_id = truck_id
-        self.weight = weight,
         self.packages = packages
         self.stops = []
         self.driver = driver
         self.miles_driven = 0
         self._speed = 18
-        self.route = []
         self.pack_map = HashMap(16)
         self.location = location
         self.current_stop = 0
         self.start_time = start_time
+        self.graph = graph
+        self.master = master
+        self.map = []
+
+        for i in packages:
+            self.pack_map.add(i, self.master.get(i))
+
+        # self.pack_map.print()
+
+
 
     def get_vertices(self, graph, map):
         for item in self.packages:
-            self.stops.append(graph.address_list[map.get(item).address])
+            self.stops.append(graph.address_to_number_list[map.get(item).address])
+            self.map.append((self.pack_map.get(item).id, graph.address_to_number_list[map.get(item).address]))
+        print(self.map)
+        print(self.stops)
+
 
     def move_to_specific_stop(self, graph, stop):
         coordinate = (self.current_stop, stop)
-        print(coordinate)
+        # print(coordinate)
         next_stop = stop
         distance = graph.edge_weights[coordinate]
-        print(f'Distance: {distance}')
-        print(f'Next Stop: {next_stop}')
         self.miles_driven += distance
         self.stops.remove(stop)
         self.current_stop = stop
 
-        print(f'Total Miles Driven: {round(self.miles_driven, 1)}')
-        print("\n")
+        self.show_route_specs(distance,next_stop)
 
 
     def move_to_nearest_stop(self, graph):
         coordinate_list = [(self.current_stop, i) for i in self.stops]
-        print(coordinate_list)
+        # print(coordinate_list)
 
         distance, next_stop = min((graph.edge_weights[k], k) for k in coordinate_list)
-        print(f'Distance: {distance}')
-        print(f'Next Stop: {next_stop}')
+
+
         self.miles_driven += distance
         self.stops.remove(next_stop[1])
         self.current_stop = next_stop[1]
 
-        print(f'Total Miles Driven: {round(self.miles_driven, 1)}')
-        print("\n")
+        self.show_route_specs(distance,next_stop)
 
-    def return_to_hub(self, graph):
-        print(self.current_stop)
-        distance = graph.edge_weights[(self.current_stop, 0)]
-        print(f'Distance: {distance}')
-        print('Next Stop: Hub')
+    # def find_next_package(self)->int:
+    #     coordinate_list = [(self.current_stop, i) for i in self.stops]
+    #     print(coordinate_list)
+    #
+    #     index = None
+    #     distance = sys.maxsize
+    #     for n in range(0,len(coordinate_list)):
+    #         if self.graph.edge_weights[coordinate_list[n]] < distance:
+    #             index = n
+    #             distance = self.graph.edge_weights[coordinate_list[n]]
+    #     print(coordinate_list[index])
+    #     print(distance)
+    #
+    #     return coordinate_list[index]
+
+    def find_next_package(self)->int:
+        coordinate_list = [(self.current_stop, i[1]) for i in self.map]
+        print(coordinate_list)
+
+        index = None
+        distance = sys.maxsize
+        for n in range(0,len(coordinate_list)):
+            if self.graph.edge_weights[coordinate_list[n]] < distance:
+                index = n
+                distance = self.graph.edge_weights[coordinate_list[n]]
+        print(coordinate_list[index])
+        print(distance)
+        next_stop = self.map[index][1]
+
+        print(f'Package: {self.map[index][0]}')
+        self.pack_map.get(self.map[index][0]).status = "Delivered"
+        self.map.pop(index)
+        self.miles_driven += distance
+        self.current_stop = next_stop
+
+        self.show_route_specs(distance, next_stop)
+
+        return coordinate_list[index]
+
+
+
+        # distance, next_stop = min((graph.edge_weights[k], k) for k in coordinate_list)
 
 
         self.miles_driven += distance
+        self.stops.remove(next_stop[1])
+        self.current_stop = next_stop[1]
+
+        self.show_route_specs(distance,next_stop)
+
+
+
+
+
+
+
+    def return_to_hub(self, graph):
+        # print(self.current_stop)
+        distance = graph.edge_weights[(self.current_stop, 0)]
+        self.miles_driven += distance
         self.current_stop = 0
 
+        self.show_route_specs(distance,'Hub')
+
+
+    def show_route_specs(self, distance, stop):
+        print(f'Distance: {distance}')
+        print(f'Next Stop: {stop}')
         print(f'Total Miles Driven: {round(self.miles_driven, 1)}')
         print("\n")
+        return
+
+
 

@@ -7,7 +7,8 @@ class Vertex:
 
 class Graph:
     def __init__(self):
-        self.address_list = {}
+        self.address_to_number_list = {}
+        self.number_to_address_list = {}
         self.adjacency_list = {}
         self.edge_weights = {}
 

@@ -13,7 +13,8 @@ def import_addresses(file, graph):
         table = []
         for row in readCSV:
 
-            graph.address_list[harmonize_directions(row[1].strip())] = row_count
+            graph.address_to_number_list[harmonize_directions(row[1].strip())] = row_count
+            graph.number_to_address_list[row_count] = harmonize_directions(row[1].strip())
             table.append(row)
             graph.add_vertex(row_count)
             row_count += 1
