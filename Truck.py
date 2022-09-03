@@ -7,8 +7,6 @@ class Timer:
     def __init__(self):
         self.time = 0
 
-
-
 class Truck:
     def __init__(self, graph, master,  truck_id, start_time, driver, location, packages):
         self.truck_id = truck_id
