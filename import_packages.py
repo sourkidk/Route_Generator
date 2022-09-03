@@ -1,6 +1,7 @@
 import csv
 from Package import Package
 from HashMap import HashMap
+from util import *
 
 
 def import_packages(file, map):
@@ -11,7 +12,7 @@ def import_packages(file, map):
             if row[0] == "":
                 break
             id = int(row[0])
-            address = row[1] + "\n(" + row[4] + ")"
+            address = harmonize_directions(row[1]) + "\n(" + row[4] + ")"
             city = row[2]
             state = row[3]
             zip = row[4]

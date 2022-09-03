@@ -2,6 +2,7 @@ import csv
 from Package import Package
 from HashMap import HashMap
 from graphs import *
+from util import *
 
 
 def import_addresses(file, graph):
@@ -14,7 +15,6 @@ def import_addresses(file, graph):
 
             graph.address_list[harmonize_directions(row[1].strip())] = row_count
             table.append(row)
-            # print(row)
             graph.add_vertex(row_count)
             row_count += 1
 
@@ -24,12 +24,4 @@ def import_addresses(file, graph):
                     graph.add_undirected_edge(int(r), int(i-2), float(table[r][i]))
 
 
-def harmonize_directions(address)->str:
-    directions = ['north', 'east', 'south', 'west', 'North', 'East', 'South', 'West']
-    abbrev = ['N', 'E', 'S', 'W']
-    for d in range(0, len(directions)):
-        if directions[d] in address:
-            # print("What!")
-            print(str.replace(address, directions[d], abbrev[d%4]))
 
-    return address
