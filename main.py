@@ -12,20 +12,17 @@ def main():
     # h.print()
     # h.get()
 
-    p = [i for i in range(1,41)]
 
+    # Truck 3 cannot leave until address is updated at 10:20 am
+    h.get(9).address = h.get(5).address # address already in the system for another package
+    print(h.get(9).address)
     truck1 = Truck(1, 0, 8,  'John', "HUB", [1,13,14,15,16,19,20,29,30,31,34,37,40])
     truck2 = Truck(2, 0, 9.1, 'Peter', "HUB", [3,6,18,25,26,27,32,33,36,35,38,39])
     truck3 = Truck(3, 0, 10.5,  'John', "HUB", [2,4,5,7,8,9,10,11,12,17,21,22,23,24,28])
 
-
-    print(truck1.packages)
-
-
     g = Graph()
     import_addresses('WGUPS Distance Table.csv', g)
-
-    print(g.address_list)
+    # print(g.address_list)
 
 
 
@@ -65,6 +62,9 @@ def main():
 
     truck2_endtime = ((truck2.start_time * 60) + (truck2.miles_driven/18 * 60))
     print(f'{math.floor(truck2_endtime/60)}:{round(truck2_endtime % 60)}')
+
+    truck3_endtime = ((truck3.start_time * 60) + (truck3.miles_driven/18 * 60))
+    print(f'{math.floor(truck3_endtime/60)}:{round(truck3_endtime % 60)}')
     print('\n')
 
     print(f'Total Miles: {truck1.miles_driven + truck2.miles_driven + truck3.miles_driven}')
