@@ -32,8 +32,12 @@ def main():
     # truck2.get_vertices(g,h)
     # truck3.get_vertices(g,h)
 
+    truck1.deliver_specific_package(15)
+
     while len(truck1.map) > 0:
-        truck1.find_next_package()
+        truck1.deliver_nearest_package()
+
+    truck1.return_to_hub()
 
 
 

@@ -51,6 +51,33 @@ class Truck:
 
         self.show_route_specs(distance,next_stop)
 
+    def deliver_specific_package(self, package):
+        stop_num = None
+        for i in range(0, len(self.map)):
+            if self.map[i][0] == package:
+                stop_num = self.map[i][1]
+            else:
+                continue
+
+
+        coordinate = (self.current_stop, stop_num )
+        distance = self.graph.edge_weights[coordinate]
+
+
+        index = stop_num
+
+        print(coordinate)
+        print(distance)
+        next_stop = stop_num
+
+        print(f'Package: {package}')
+        self.pack_map.get(package).status = "Delivered"
+        self.map.remove((package,stop_num))
+        self.miles_driven += distance
+        self.current_stop = next_stop
+
+        self.show_route_specs(distance, next_stop)
+        return
 
     def move_to_nearest_stop(self, graph):
         coordinate_list = [(self.current_stop, i) for i in self.stops]
@@ -65,24 +92,11 @@ class Truck:
 
         self.show_route_specs(distance,next_stop)
 
-    # def find_next_package(self)->int:
-    #     coordinate_list = [(self.current_stop, i) for i in self.stops]
-    #     print(coordinate_list)
-    #
-    #     index = None
-    #     distance = sys.maxsize
-    #     for n in range(0,len(coordinate_list)):
-    #         if self.graph.edge_weights[coordinate_list[n]] < distance:
-    #             index = n
-    #             distance = self.graph.edge_weights[coordinate_list[n]]
-    #     print(coordinate_list[index])
-    #     print(distance)
-    #
-    #     return coordinate_list[index]
 
-    def find_next_package(self)->int:
+
+    def deliver_nearest_package(self):
         coordinate_list = [(self.current_stop, i[1]) for i in self.map]
-        print(coordinate_list)
+        # print(coordinate_list)
 
         index = None
         distance = sys.maxsize
@@ -101,19 +115,7 @@ class Truck:
         self.current_stop = next_stop
 
         self.show_route_specs(distance, next_stop)
-
-        return coordinate_list[index]
-
-
-
-        # distance, next_stop = min((graph.edge_weights[k], k) for k in coordinate_list)
-
-
-        self.miles_driven += distance
-        self.stops.remove(next_stop[1])
-        self.current_stop = next_stop[1]
-
-        self.show_route_specs(distance,next_stop)
+        return
 
 
 
@@ -121,9 +123,11 @@ class Truck:
 
 
 
-    def return_to_hub(self, graph):
+
+
+    def return_to_hub(self):
         # print(self.current_stop)
-        distance = graph.edge_weights[(self.current_stop, 0)]
+        distance = self.graph.edge_weights[(self.current_stop, 0)]
         self.miles_driven += distance
         self.current_stop = 0
 
