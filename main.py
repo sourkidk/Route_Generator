@@ -5,7 +5,6 @@
 
 from route import *
 from util import *
-# from sys
 
 def main():
     print_introduction()
