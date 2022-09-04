@@ -27,14 +27,7 @@ class Route:
         return
 
 
-
-
-
-
-
-
     def start_route(self):
-
 
         package_hash = HashMap(40)
         import_packages('WGUPS Package File.csv', package_hash)
