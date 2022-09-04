@@ -19,29 +19,40 @@ class Truck:
         self.package_map = HashMap(40)
         self.location = location
         self.current_stop = 0
-        self.start_time = start_time
+        self.start_time = time_to_minutes(start_time)
         self.graph = graph
         self.master = master
         self.package_list = []
-        self.truck_time = self.start_time * 60
+        self.current_time = self.start_time * 60
+        self.truck_times = []
 
         for i in packages:
             self.master.get(i).status = "En-route"
-            self.master.get(i).loaded_time = self.truck_time
+            self.master.get(i).loaded_time = self.current_time
             self.package_map.add(i, self.master.get(i))
 
         # self.package_map.print()
 
     def update_truck_time(self):
-        self.truck_time = (self.start_time * 60) + (self.miles_driven/18 * 60)
+
+        temp = round((self.start_time + (self.miles_driven/18 * 60)),2)
+        self.current_time = temp
+        self.truck_times.append((temp, self.miles_driven))
+
+    def get_current_time(self):
+        return minutes_to_time(self.current_time)
 
     def get_vertices(self, graph, map):
         for item in self.packages:
             self.package_list.append((self.package_map.get(item).id, graph.address_to_number_list[map.get(item).address]))
 
-
-
-
+    def get_mileage_at_time(self, time: int):
+        if time < self.start_time:
+            return 0
+        elif time > self.current_time:
+            return self.miles_driven
+        else:
+            return ((time - self.start_time)/60 * 18)
 
     def deliver_specific_package(self, package):
         stop_num = None
@@ -61,7 +72,7 @@ class Truck:
         self.package_list.remove((package, stop_num))
         self.miles_driven += distance
         self.update_truck_time()
-        self.package_map.get(package).delivery_time = self.truck_time
+        self.package_map.get(package).delivery_time = self.current_time
 
 
 
@@ -82,7 +93,7 @@ class Truck:
         next_stop = self.package_list[index][1]
         package = self.package_list[index][0]
         self.package_map.get(package).status = "Delivered"
-        self.package_map.get(package).delivery_time = self.truck_time
+        self.package_map.get(package).delivery_time = self.current_time
 
         self.package_list.pop(index)
         self.miles_driven += distance

@@ -1,5 +1,5 @@
 import sys
-from util import minutes_to_time
+from util import *
 class Package:
     def __init__(self, id, address, city, state, zip, deadline, mass, notes):
         self.id = id
