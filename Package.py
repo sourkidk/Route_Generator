@@ -1,5 +1,7 @@
 import sys
 from util import *
+
+# Package class holds all the relevant data about each package.
 class Package:
     def __init__(self, id, address, city, state, zip, deadline, mass, notes):
         self.id = id

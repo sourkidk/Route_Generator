@@ -1,3 +1,5 @@
+# Vertex class: used to build Graph class
+# Source: Zybooks: Graphs in Python
 class Vertex:
     def __init__(self, label):
         self.label = label
@@ -5,6 +7,11 @@ class Vertex:
     # def __repr__(self):
     #     return str(self.label)
 
+# This is a graph data structure built using python's built-in
+# dictionaries, which are essentially hashmaps.  Hashmaps insert and
+# lookup in O(1) so they are very efficient.  Of course, in most case
+# iteration is necessary to access multiple possibilities which will
+# increase time complexity.
 class Graph:
     def __init__(self):
         self.address_to_number_list = {}

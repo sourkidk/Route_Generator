@@ -1,8 +1,10 @@
-
 from import_address import *
 from import_packages import *
 from Truck import Truck
 
+# Route class takes all the input files and generates the data structures
+# for the hashmap and graph.  The main program runs in O(logn) time due to the
+# nested for loops with the inner loop decreasing in size as the route progresses.
 class Route:
     def __init__(self, name, address_file, package_file):
         self.name = name
@@ -15,6 +17,8 @@ class Route:
         import_addresses(self.address_file, self.location_graph)
         import_packages(self.package_file, self.package_hash)
 
+    # method to return the status of each package and the total mileage at any
+    # given time.  Runs in O(n).
     def get_status(self, time):
         mileage = 0
         for truck in self.trucks:
