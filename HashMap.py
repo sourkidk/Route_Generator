@@ -51,6 +51,14 @@ class HashMap:
             if item is not None:
                 print(str(item))
 
+    def status(self, time):
+        for item in self.map:
+            if item is not None:
+                for n in item:
+                    n[1].get_status(time)
+            else:
+                continue
+
 
 
 

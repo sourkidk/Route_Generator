@@ -9,7 +9,12 @@ def harmonize_directions(address)->str:
             temp = temp
     return temp
 
-def time_formatting(time_in_minutes):
+def minutes_to_time(time_in_minutes):
     return f'{int(time_in_minutes / 60)}:{(int(time_in_minutes) % 60):02}'
+
+def time_to_minutes(time: str):
+    list = time.split(':')
+    total = (int)(list[0]) * 60 + (int)(list[1])
+    return total
 
 
