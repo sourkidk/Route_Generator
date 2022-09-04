@@ -6,14 +6,19 @@ from Truck import Truck
 from datetime import *
 
 class Route:
-    def __init__(self, name):
+    def __init__(self, name, address_file):
         self.name = name
+        self.location_graph = Graph()
+        self.address_file = address_file
+        
+        import_addresses('WGUPS Distance Table.csv', self.location_graph)
+
 
 
 
     def start_route(self):
-        location_graph = Graph()
-        import_addresses('WGUPS Distance Table.csv', location_graph)
+        # self.location_graph = Graph()
+        # import_addresses('WGUPS Distance Table.csv', self.location_graph)
 
         h = HashMap(40)
         import_packages('WGUPS Package File.csv', h)
@@ -24,13 +29,13 @@ class Route:
         # Truck 3 cannot leave until address is updated at 10:20 am
         h.get(9).address = h.get(5).address # address already in the system for another package
         # print(h.get(9).address)
-        truck1 = Truck(location_graph, h, 1, '8:00', 'John', "HUB", [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40])
-        truck2 = Truck(location_graph, h, 2, '9:06', 'Peter', "HUB", [3, 6, 18, 25, 26, 27, 32, 33, 36, 35, 38, 39])
-        truck3 = Truck(location_graph, h, 3, '10:3', 'John', "HUB", [2, 4, 5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24, 28])
+        truck1 = Truck(self.location_graph, h, 1, '8:00', 'John', "HUB", [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40])
+        truck2 = Truck(self.location_graph, h, 2, '9:06', 'Peter', "HUB", [3, 6, 18, 25, 26, 27, 32, 33, 36, 35, 38, 39])
+        truck3 = Truck(self.location_graph, h, 3, '10:3', 'John', "HUB", [2, 4, 5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24, 28])
 
-        truck1.get_vertices(location_graph, h)
-        truck2.get_vertices(location_graph, h)
-        truck3.get_vertices(location_graph, h)
+        truck1.get_vertices(self.location_graph, h)
+        truck2.get_vertices(self.location_graph, h)
+        truck3.get_vertices(self.location_graph, h)
 
 
         truck1.deliver_specific_package(15)

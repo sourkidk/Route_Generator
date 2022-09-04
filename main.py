@@ -8,7 +8,7 @@ from route import *
 
 
 def main():
-    today = Route("Today")
+    today = Route("Today", 'WGUPS Distance Table.csv')
     today.start_route()
 
 
