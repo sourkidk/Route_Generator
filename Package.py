@@ -25,19 +25,21 @@ class Package:
     def deliver_package(self):
         self.status = "Delivered"
 
-    def get_status(self, time: int):
-
-        if int(self.delivery_time) <= time:
+    def get_status(self, time):
+        minutes = time_to_minutes(time)
+        if int(self.delivery_time) <= minutes:
             status = f'Delivered @ {minutes_to_time(self.delivery_time)}'
-        elif int(self.loaded_time) <= time:
+        elif int(self.loaded_time) <= minutes:
             status = f'Loaded @ {minutes_to_time(self.loaded_time)}'
         else:
             status = "At HUB"
 
-        message = f'Package: {self.id} Address: {self.address}  {status}'
+        temp = self.address.replace('\n', ' ')
+
+        message = f'Package: {self.id}      Address: {temp}         {status}'
 
         print(message)
-        print('----------')
+        print('--------------------------------------------------------------')
 
 
 

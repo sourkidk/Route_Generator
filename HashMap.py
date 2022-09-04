@@ -1,3 +1,5 @@
+from util import *
+
 class HashMap:
     def __init__(self, size):
         self.size = size
@@ -58,13 +60,6 @@ class HashMap:
             else:
                 continue
 
-    # def status(self, time):
-    #     for slot in self.map:
-    #         if slot is not None:
-    #             for item in slot:
-    #                 item[1].get_status(time)
-    #         else:
-    #             continue
 
 
 

@@ -38,27 +38,15 @@ class Route:
 
 
         truck1.dispatch_truck([15])
-        truck2.dispatch_truck([25,6])
-        truck3.dispatch_truck()
+        # truck2.dispatch_truck([25,6])
+        # truck3.dispatch_truck()
 
 
-        print(truck1.miles_driven)
-        print(truck1.get_current_time())
-        print("-------------------")
+        total = 0
+        for truck in self.trucks:
+            total += truck.miles_driven
 
-
-        print(truck2.miles_driven)
-        print(truck2.get_current_time())
-        print("-------------------")
-
-
-        print(round(truck3.miles_driven, 2))
-        print(truck3.get_current_time())
-        print('\n')
-
-        print(f'Total Miles: {truck1.miles_driven + truck2.miles_driven + truck3.miles_driven}')
+        print(f'Total Miles: {total}')
 
         # print(truck1.truck_times)
         # print(truck1.get_mileage_at_time(540))
-        # package_hash.status(510)
-        # package_hash.print()
