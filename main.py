@@ -1,14 +1,12 @@
-import math
 
 from import_address import *
 from import_packages import *
 from Truck import Truck
-from datetime import *
 from route import *
 
 
 def main():
-    today = Route("Today", 'WGUPS Distance Table.csv')
+    today = Route("Today", 'WGUPS Distance Table.csv', 'WGUPS Package File.csv')
     today.start_route()
 
 

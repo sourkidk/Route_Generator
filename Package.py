@@ -18,8 +18,6 @@ class Package:
     def __str__(self):
         return '{self.id}: {self.address} : {self.deadline}'.format(self=self)
 
-    # def __repr__(self):
-        # return 'Package_#: {self.id}'.format(self=self)
 
     def __repr__(self):
         return 'Package_#: {self.id} : {self.status}'.format(self=self)
