@@ -30,7 +30,7 @@ class Package:
         if int(self.delivery_time) <= minutes:
             status = f'Delivered @ {minutes_to_time(self.delivery_time)}'
         elif int(self.loaded_time) <= minutes:
-            status = f'Loaded @ {minutes_to_time(self.loaded_time)}'
+            status = f'En-Route - Loaded @ {minutes_to_time(self.loaded_time)}'
         else:
             status = "At HUB"
 

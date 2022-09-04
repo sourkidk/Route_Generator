@@ -15,6 +15,23 @@ class Route:
         import_addresses(self.address_file, self.location_graph)
         import_packages(self.package_file, self.package_hash)
 
+    def get_status(self, time):
+        mileage = 0
+        for truck in self.trucks:
+            mileage += truck.get_mileage_at_time(time)
+
+        print(f'Total mileage by all trucks at {time} : {round(mileage,2)}\n')
+        self.package_hash.status(time)
+        print(f'Total mileage by all trucks at {time} : {round(mileage,2)}\n')
+
+        return
+
+
+
+
+
+
+
 
     def start_route(self):
 
@@ -37,16 +54,24 @@ class Route:
         self.trucks.append(truck3)
 
 
+
+
+
         truck1.dispatch_truck([15])
-        # truck2.dispatch_truck([25,6])
-        # truck3.dispatch_truck()
+        truck2.dispatch_truck([25,6])
+        truck3.dispatch_truck()
 
 
         total = 0
         for truck in self.trucks:
             total += truck.miles_driven
-
+        print('Route Results:')
+        print('All Packages Delivered')
         print(f'Total Miles: {total}')
+        print('-------------------------')
+
+        # test = truck1.get_mileage_at_time('9:30')
+        # print(f'Miles Driven: {test}')
 
         # print(truck1.truck_times)
         # print(truck1.get_mileage_at_time(540))

@@ -1,12 +1,6 @@
 from HashMap import HashMap
-from graphs import *
-from datetime import *
 from util import *
 import sys
-
-class Timer:
-    def __init__(self):
-        self.time = 0
 
 class Truck:
     def __init__(self, graph, master,  truck_id, start_time, driver, location, packages):
@@ -23,7 +17,7 @@ class Truck:
         self.graph = graph
         self.master = master
         self.package_list = []
-        self.current_time = self.start_time * 60
+        self.current_time = self.start_time
         self.truck_times = []
 
         for i in packages:
@@ -69,13 +63,17 @@ class Truck:
 
 
 
-    def get_mileage_at_time(self, time: int):
-        if time < self.start_time:
+    def get_mileage_at_time(self, time):
+        minutes = time_to_minutes(time)
+        # print(minutes)
+        if minutes < self.start_time:
             return 0
-        elif time > self.current_time:
+        elif minutes > self.current_time:
             return self.miles_driven
         else:
-            return ((time - self.start_time)/60 * 18)
+            return ((minutes - self.start_time)/60 * 18)
+
+
 
     def deliver_specific_package(self, package):
         stop_num = None
@@ -137,14 +135,14 @@ class Truck:
         self.current_stop = 0
 
     def show_route_specs(self, distance, stop, package = None):
-        print(f'Truck #: {self.truck_id}')
-        print(f'Edge: {(self.current_stop,stop)}')
-        print(f'Distance: {distance}')
-        print(f'Next Stop: {stop}')
-        print(f'Package: {package}')
-        print(f'Total Miles Driven: {round(self.miles_driven, 1)}')
-        print(f'Time:  {minutes_to_time(self.current_time)}')
-        print("\n")
+        # print(f'Truck #: {self.truck_id}')
+        # print(f'Edge: {(self.current_stop,stop)}')
+        # print(f'Distance: {distance}')
+        # print(f'Next Stop: {stop}')
+        # print(f'Package: {package}')
+        # print(f'Total Miles Driven: {round(self.miles_driven, 1)}')
+        # print(f'Time:  {minutes_to_time(self.current_time)}')
+        # print("\n")
         return
 
 
