@@ -1,7 +1,8 @@
 import sys
 from util import *
 
-# Package class holds all the relevant data about each package.
+# Package class holds all the relevant data about each package.  The package objects are contained in Hashmaps which makes accessing them
+# efficient.  Generally O(1) for each insert or lookup.
 class Package:
     def __init__(self, id, address, city, state, zip, deadline, mass, notes):
         self.id = id
@@ -24,9 +25,12 @@ class Package:
     def __repr__(self):
         return 'Package_#: {self.id} : {self.status}'.format(self=self)
 
+    # Basic method to update the package status to 'Delivered'
     def deliver_package(self):
         self.status = "Delivered"
 
+    # This method compares a time input to the delivery and/or loading times of a package and then generates
+    # a status message representing the package state at that time.
     def get_status(self, time):
         minutes = time_to_minutes(time)
         if int(self.delivery_time) <= minutes:

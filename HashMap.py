@@ -1,19 +1,22 @@
 from util import *
 
+# HashMap is the core data structure containing the packages.  Hashmap
+# in general operate on O(1) for inserts and lookups as the key-value relations ship,
+# make operation very fast.  However, this is under ideal circumstances with little or no collisions
+# and balance accross the map
+# Source: Joe james "Python: Creating a Hashmap using List"
 class HashMap:
     def __init__(self, size):
         self.size = size
         self.map = [None] * self.size
 
-    # def _get_hash(self, key):
-    #     hash = 0
-    #     for char in str(key):
-    #         hash += ord(char)
-    #     return hash % self.size
 
+    # Most basic hash function using package id for key_hash
     def _get_hash(self, key):
         return key % self.size
 
+    # insert function works in O(1) as the check using the key is O(1) and then, when a collision
+    # occurs, the check for update or add is O(1)
     def add(self, key, value):
         key_hash = self._get_hash(key)
         key_value = [key, value]
@@ -29,6 +32,8 @@ class HashMap:
             self.map[key_hash].append(key_value)
             return True
 
+    # get function works in O(1) as the check using the key is O(1) and then, when a collision
+    # occurs, the check for update or add is O(n).  For a balanced map, the collisions should be minimal
     def get(self, key):
         key_hash = self._get_hash(key)
         if self.map[key_hash] is not None:
@@ -53,6 +58,8 @@ class HashMap:
             if item is not None:
                 print(str(item))
 
+    # Displays the status of the whole map by iterating through all the slots
+    # Runs in O(n)
     def status(self, time):
         for i in range(1, len(self.map) + 1):
             if self.get(i) is not None:
