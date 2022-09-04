@@ -10,6 +10,7 @@ class Route:
         self.address_file = address_file
         self.package_file = package_file
         self.package_hash = HashMap(40)
+        self.trucks = []
         
         import_addresses(self.address_file, self.location_graph)
         import_packages(self.package_file, self.package_hash)
@@ -33,7 +34,9 @@ class Route:
         truck1 = Truck(self.location_graph, package_hash, 1, '8:00', 'John', "HUB", [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40])
         truck2 = Truck(self.location_graph, package_hash, 2, '9:06', 'Peter', "HUB", [3, 6, 18, 25, 26, 27, 32, 33, 36, 35, 38, 39])
         truck3 = Truck(self.location_graph, package_hash, 3, '10:3', 'John', "HUB", [2, 4, 5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24, 28])
-
+        self.trucks.append(truck1)
+        self.trucks.append(truck2)
+        self.trucks.append(truck3)
         truck1.get_vertices(self.location_graph, package_hash)
         truck2.get_vertices(self.location_graph, package_hash)
         truck3.get_vertices(self.location_graph, package_hash)

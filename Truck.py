@@ -44,7 +44,9 @@ class Truck:
 
     def get_vertices(self, graph, map):
         for item in self.packages:
-            self.package_list.append((self.package_map.get(item).id, graph.address_to_number_list[map.get(item).address]))
+            self.package_list.append((self.package_map.get(item).id, self.graph.address_to_number_list[self.master.get(item).address]))
+
+    def dispatch_truck(self):
 
     def get_mileage_at_time(self, time: int):
         if time < self.start_time:
