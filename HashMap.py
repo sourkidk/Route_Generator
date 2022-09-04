@@ -52,12 +52,19 @@ class HashMap:
                 print(str(item))
 
     def status(self, time):
-        for item in self.map:
-            if item is not None:
-                for n in item:
-                    n[1].get_status(time)
+        for i in range(1, len(self.map) + 1):
+            if self.get(i) is not None:
+                self.get(i).get_status(time)
             else:
                 continue
+
+    # def status(self, time):
+    #     for slot in self.map:
+    #         if slot is not None:
+    #             for item in slot:
+    #                 item[1].get_status(time)
+    #         else:
+    #             continue
 
 
 

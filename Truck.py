@@ -42,11 +42,24 @@ class Truck:
     def get_current_time(self):
         return minutes_to_time(self.current_time)
 
-    def get_vertices(self, graph, map):
+    def get_vertices(self):
         for item in self.packages:
             self.package_list.append((self.package_map.get(item).id, self.graph.address_to_number_list[self.master.get(item).address]))
 
-    def dispatch_truck(self):
+    def dispatch_truck(self, priority_stops=None):
+        self.get_vertices()
+        if priority_stops != None:
+            for item in priority_stops:
+                self.deliver_specific_package(item)
+        else:
+            pass
+
+        while len(self.package_list) > 0:
+            self.deliver_nearest_package()
+
+        self.return_to_hub()
+
+
 
     def get_mileage_at_time(self, time: int):
         if time < self.start_time:
