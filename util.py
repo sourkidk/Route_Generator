@@ -17,4 +17,4 @@ def time_to_minutes(time: str):
     total = (int)(list[0]) * 60 + (int)(list[1])
     return total
 
-# asdfsdf
+

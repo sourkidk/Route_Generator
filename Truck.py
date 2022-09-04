@@ -1,12 +1,6 @@
 from HashMap import HashMap
-from graphs import *
-from datetime import *
 from util import *
 import sys
-
-class Timer:
-    def __init__(self):
-        self.time = 0
 
 class Truck:
     def __init__(self, graph, master,  truck_id, start_time, driver, location, packages):
@@ -23,7 +17,7 @@ class Truck:
         self.graph = graph
         self.master = master
         self.package_list = []
-        self.current_time = self.start_time * 60
+        self.current_time = self.start_time
         self.truck_times = []
 
         for i in packages:
@@ -42,17 +36,44 @@ class Truck:
     def get_current_time(self):
         return minutes_to_time(self.current_time)
 
-    def get_vertices(self, graph, map):
+    def get_vertices(self):
         for item in self.packages:
-            self.package_list.append((self.package_map.get(item).id, graph.address_to_number_list[map.get(item).address]))
+            self.package_list.append((self.package_map.get(item).id, self.graph.address_to_number_list[self.master.get(item).address]))
 
-    def get_mileage_at_time(self, time: int):
-        if time < self.start_time:
+    def display_route_stats(self):
+        print(f'Truck {self.truck_id} - {round(self.miles_driven, 2)} miles driven')
+        print(f'Route completed at {self.get_current_time()}')
+        print("-------------------")
+
+
+    def dispatch_truck(self, priority_stops=None):
+        self.get_vertices()
+        if priority_stops != None:
+            for item in priority_stops:
+                self.deliver_specific_package(item)
+        else:
+            pass
+
+        while len(self.package_list) > 0:
+            self.deliver_nearest_package()
+
+        self.return_to_hub()
+
+        self.display_route_stats()
+
+
+
+    def get_mileage_at_time(self, time):
+        minutes = time_to_minutes(time)
+        # print(minutes)
+        if minutes < self.start_time:
             return 0
-        elif time > self.current_time:
+        elif minutes > self.current_time:
             return self.miles_driven
         else:
-            return ((time - self.start_time)/60 * 18)
+            return ((minutes - self.start_time)/60 * 18)
+
+
 
     def deliver_specific_package(self, package):
         stop_num = None
@@ -110,18 +131,17 @@ class Truck:
         distance = self.graph.edge_weights[(self.current_stop, 0)]
         self.miles_driven += distance
         self.update_truck_time()
-
         self.show_route_specs(distance,'Hub')
-
         self.current_stop = 0
 
     def show_route_specs(self, distance, stop, package = None):
-
+        # print(f'Truck #: {self.truck_id}')
         # print(f'Edge: {(self.current_stop,stop)}')
         # print(f'Distance: {distance}')
         # print(f'Next Stop: {stop}')
         # print(f'Package: {package}')
         # print(f'Total Miles Driven: {round(self.miles_driven, 1)}')
+        # print(f'Time:  {minutes_to_time(self.current_time)}')
         # print("\n")
         return
 
