@@ -8,8 +8,9 @@ from route import *
 
 
 def main():
+    today = Route("Today")
+    today.start_route()
 
-    start_route()
 
 
 if __name__ == '__main__':
