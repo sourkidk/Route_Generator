@@ -25,6 +25,7 @@ def main():
         requested_time = input('To exit, enter \'x\'...\n')
         if requested_time == 'x':
             state = False
+            break
         else:
             try:
                 # Runs in O(n) as it's just iterating through the list and doing a single comparison
