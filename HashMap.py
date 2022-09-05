@@ -12,38 +12,38 @@ class HashMap:
 
 
     # Most basic hash function using package id for key_hash
-    def _get_hash(self, key):
+    def hash_function(self, key):
         return key % self.size
 
     # insert function works in O(1) as the check using the key is O(1) and then, when a collision
     # occurs, the check for update or add is O(1)
-    def add(self, key, value):
-        key_hash = self._get_hash(key)
+    def insert(self, key, value):
+        key_hash = self.hash_function(key)
         key_value = [key, value]
 
         if self.map[key_hash] is None:
             self.map[key_hash] = list([key_value])
             return True
         else:
-            for pair in self.map[key_hash]:
-                if pair[0] == key:
-                    pair[1] = value
+            for entry in self.map[key_hash]:
+                if entry[0] == key:
+                    entry[1] = value
                     return True
             self.map[key_hash].append(key_value)
             return True
 
     # get function works in O(1) as the check using the key is O(1) and then, when a collision
     # occurs, the check for update or add is O(n).  For a balanced map, the collisions should be minimal
-    def get(self, key):
-        key_hash = self._get_hash(key)
+    def lookup(self, key):
+        key_hash = self.hash_function(key)
         if self.map[key_hash] is not None:
-            for pair in self.map[key_hash]:
-                if pair[0] == key:
-                    return pair[1]
+            for entry in self.map[key_hash]:
+                if entry[0] == key:
+                    return entry[1]
         return None
 
     def delete(self, key):
-        key_hash = self._get_hash(key)
+        key_hash = self.hash_function(key)
 
         if self.map[key_hash] is None:
             return False
@@ -54,16 +54,16 @@ class HashMap:
 
     def print(self):
         print('----Stuff----')
-        for item in self.map:
-            if item is not None:
-                print(str(item))
+        for unit in self.map:
+            if unit is not None:
+                print(str(unit))
 
     # Displays the status of the whole map by iterating through all the slots
     # Runs in O(n)
     def status(self, time):
         for i in range(1, len(self.map) + 1):
-            if self.get(i) is not None:
-                self.get(i).get_status(time)
+            if self.lookup(i) is not None:
+                self.lookup(i).get_status(time)
             else:
                 continue
 

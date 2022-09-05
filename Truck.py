@@ -23,9 +23,9 @@ class Truck:
         self.truck_times = []
 
         for i in packages:
-            self.master.get(i).status = "En-route"
-            self.master.get(i).loaded_time = self.current_time
-            self.package_map.add(i, self.master.get(i))
+            self.master.lookup(i).status = "En-route"
+            self.master.lookup(i).loaded_time = self.current_time
+            self.package_map.insert(i, self.master.lookup(i))
 
     # Method to assist with tracking time consumption throughout the route.
     def update_truck_time(self):
@@ -40,7 +40,7 @@ class Truck:
     # This method is used to convert the package_list into a list of tuples with package id and address id.
     def get_vertices(self):
         for item in self.packages:
-            self.package_list.append((self.package_map.get(item).id, self.graph.address_to_number_list[self.master.get(item).address]))
+            self.package_list.append((self.package_map.lookup(item).id, self.graph.address_to_number_list[self.master.lookup(item).address]))
 
     # Displays stats for routes
     def display_route_stats(self):
@@ -56,12 +56,10 @@ class Truck:
                 self.deliver_specific_package(item)
         else:
             pass
-
         while len(self.package_list) > 0:
             self.deliver_nearest_package()
 
         self.return_to_hub()
-
         self.display_route_stats()
 
 
@@ -94,13 +92,11 @@ class Truck:
 
         next_stop = stop_num
 
-        self.package_map.get(package).status = "Delivered"
+        self.package_map.lookup(package).status = "Delivered"
         self.package_list.remove((package, stop_num))
         self.miles_driven += distance
         self.update_truck_time()
-        self.package_map.get(package).delivery_time = self.current_time
-
-
+        self.package_map.lookup(package).delivery_time = self.current_time
 
         self.show_route_specs(distance, next_stop, package)
 
@@ -123,8 +119,8 @@ class Truck:
                 distance = self.graph.edge_weights[coordinate_list[n]]
         next_stop = self.package_list[index][1]
         package = self.package_list[index][0]
-        self.package_map.get(package).status = "Delivered"
-        self.package_map.get(package).delivery_time = self.current_time
+        self.package_map.lookup(package).status = "Delivered"
+        self.package_map.lookup(package).delivery_time = self.current_time
 
         self.package_list.pop(index)
         self.miles_driven += distance

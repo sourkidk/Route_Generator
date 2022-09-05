@@ -20,7 +20,7 @@ def import_packages(file, map):
             mass = int(row[6])
             notes = row[7]
 
-            map.add(id, Package(id, address, city, state, zip, deadline, mass, notes))
+            map.insert(id, Package(id, address, city, state, zip, deadline, mass, notes))
 
 
 

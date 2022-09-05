@@ -32,13 +32,7 @@ def main():
             except:
                 print('The string you entered is not a valid time.  Please try again.')
 
-
-
     print("Exiting WGU-PS...")
-
-
-
-
 
 
 if __name__ == '__main__':

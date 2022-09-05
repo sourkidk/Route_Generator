@@ -25,7 +25,3 @@ def time_to_minutes(time: str):
 def print_introduction():
     print('Western Goverornors University - Parcel Service')
     print('-----------------------------------------------')
-
-
-
-

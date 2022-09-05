@@ -35,12 +35,10 @@ class Route:
 
         package_hash = HashMap(40)
         import_packages('WGUPS Package File.csv', package_hash)
-        # package_hash.print()
-        # package_hash.get()
 
 
         # Truck 3 cannot leave until address is updated at 10:20 am
-        package_hash.get(9).address = package_hash.get(5).address # address already in the system for another package
+        package_hash.lookup(9).address = package_hash.lookup(5).address # address already in the system for another package
 
         truck1 = Truck(self.location_graph, self.package_hash, 1, '8:00', 'John', "HUB", [1, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 40])
         truck2 = Truck(self.location_graph, self.package_hash, 2, '9:06', 'Peter', "HUB", [3, 6, 18, 25, 26, 27, 32, 33, 36, 35, 38, 39])
@@ -50,14 +48,9 @@ class Route:
         self.trucks.append(truck2)
         self.trucks.append(truck3)
 
-
-
-
-
         truck1.dispatch_truck([15])
         truck2.dispatch_truck([25,6])
         truck3.dispatch_truck()
-
 
         total = 0
         for truck in self.trucks:
@@ -67,8 +60,3 @@ class Route:
         print(f'Total Miles: {total}')
         print('-------------------------')
 
-        # test = truck1.get_mileage_at_time('9:30')
-        # print(f'Miles Driven: {test}')
-
-        # print(truck1.truck_times)
-        # print(truck1.get_mileage_at_time(540))
