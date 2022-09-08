@@ -42,7 +42,7 @@ class Package:
 
         temp = self.address.replace('\n', ' ')
 
-        message = f'Package: {self.id}      Address: {temp}         {status}'
+        message = f'Package: {self.id}      Deadline: {self.deadline}      Address: {temp}         {status}'
 
         print(message)
         print('--------------------------------------------------------------')
