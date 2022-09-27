@@ -1,7 +1,6 @@
-# WGU-PS C950 Project
+
 # Keith Fletcher
-# kflet87@wgu.edu
-# ID: 009224586
+
 
 from route import *
 from util import *
